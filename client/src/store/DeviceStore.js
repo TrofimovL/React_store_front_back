@@ -13,37 +13,37 @@ export default class DeviceStore {
         makeAutoObservable(this)
     }
 
-    setTypes(types) {
+    set types(types) {
         this._types = types
     }
 
-    setBrands(brands) {
+    set brands(brands) {
         this._brands = brands
     }
 
-    setDevices(devices) {
+    set devices(devices) {
         this._devices = devices
     }
 
-    setSelectedType(type) {
-        this.setPage(1)
+    set selectedType(type) {
+        this.page = 1
         this._selectedType = type
     }
 
-    setSelectedBrand(brand) {
-        this.setPage(1)
+    set selectedBrand(brand) {
+        this.page = 1
         this._selectedBrand = brand
     }
 
-    setPage(page) {
+    set page(page) {
         this._page = page
     }
 
-    setTotalCount(totalCount) {
+    set totalCount(totalCount) {
         this._totalCount = totalCount
     }
 
-    setLimit(limit) {
+    set limit(limit) {
         this._limit = limit
     }
 

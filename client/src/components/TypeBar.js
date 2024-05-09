@@ -10,7 +10,7 @@ const TypeBar = () => {
             {deviceStore.types.map(type =>
                 <ListGroup.Item key={type.id}
                                 style={{cursor: "pointer"}}
-                                onClick={() => deviceStore.setSelectedType(type)}
+                                onClick={() => deviceStore.selectedType = type}
                                 active={type.id === deviceStore.selectedType.id}>
                     {type.name}
                 </ListGroup.Item>

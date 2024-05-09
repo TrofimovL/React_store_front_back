@@ -14,9 +14,9 @@ const CreateDevice = observer(({show, onHide}) => {
     const [info, setInfo] = useState([])
 
     useEffect(() => {
-        fetchTypes().then(data => deviceStore.setTypes(data))
-        fetchBrands().then(data => deviceStore.setBrands(data))
-    }, [])
+        fetchTypes().then(data => deviceStore.types = data)
+        fetchBrands().then(data => deviceStore.brands = data)
+    }, [deviceStore])
 
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
@@ -34,7 +34,7 @@ const CreateDevice = observer(({show, onHide}) => {
         setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i)) // [key] ?
     }
 
-    const addDevice = ()=>{
+    const addDevice = () => {
         const formData = new FormData();
         formData.append('name', price)
         formData.append('price', price)
@@ -59,7 +59,7 @@ const CreateDevice = observer(({show, onHide}) => {
                             {deviceStore.types.map(type =>
                                 <Dropdown.Item
                                     key={type.id}
-                                    onClick={() => deviceStore.setSelectedType(type)}
+                                    onClick={() => deviceStore.selectedType = type}
                                 >
                                     {type.name}
                                 </Dropdown.Item>
@@ -72,7 +72,7 @@ const CreateDevice = observer(({show, onHide}) => {
                             {deviceStore.brands.map(brand =>
                                 <Dropdown.Item
                                     key={brand.id}
-                                    onClick={() => deviceStore.setSelectedBrand(brand)}
+                                    onClick={() => deviceStore.selectedBrand = brand}
                                 >
                                     {brand.name}
                                 </Dropdown.Item>
@@ -106,7 +106,7 @@ const CreateDevice = observer(({show, onHide}) => {
                                 <Form.Control
                                     placeholder='Название'
                                     value={i.title}
-                                    onChange={(event)=> changeInfo('title', event.target.value, i.number)}
+                                    onChange={(event) => changeInfo('title', event.target.value, i.number)}
                                 >
                                 </Form.Control>
                             </Col>
@@ -114,7 +114,7 @@ const CreateDevice = observer(({show, onHide}) => {
                                 <Form.Control
                                     placeholder='Описание'
                                     value={i.description}
-                                    onChange={(event)=> changeInfo('description', event.target.value, i.number)}
+                                    onChange={(event) => changeInfo('description', event.target.value, i.number)}
                                 >
                                 </Form.Control>
                             </Col>
