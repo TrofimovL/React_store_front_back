@@ -18,10 +18,6 @@ export const login = async (email, password) => {
     return jwtDecode(data.token)
 }
 
-export const logout = async () => {
-    localStorage.removeItem('token')
-
-}
 
 export const check = async () => {
     if (localStorage.getItem('token')) {
@@ -32,8 +28,7 @@ export const check = async () => {
             return null
         }
 
-        console.log('check success', data)
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('check success. Token:', data.token)
         return jwtDecode(data.token)
 
     } else {

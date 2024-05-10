@@ -9,10 +9,10 @@ const NavbarComponent = () => {
     const {userStore} = useContext(Context)
     const navigate = useNavigate();
 
-    const logout = ()=>{
-        // user.setUser({})
+    const logout = () => {
         userStore.user = {}
         userStore.isAuth = false
+        localStorage.removeItem('token')
         navigate(LOGIN_ROUTE)
     }
 
@@ -23,17 +23,22 @@ const NavbarComponent = () => {
 
                 {userStore.isAuth ?
                     <Nav className="ml-auto text-white">
-                        <Button onClick={()=> navigate(ADMIN_ROUTE)}>Админ панель</Button>
+
+                        {
+                            userStore.user.role && <Button onClick={() => navigate(ADMIN_ROUTE)}>Админ панель</Button>
+                        }
                         <Button
                             className='mx-2'
-                            onClick={()=> {logout()}}
+                            onClick={() => {
+                                logout()
+                            }}
                         >
                             Выйти
                         </Button>
                     </Nav>
                     :
                     <Nav className="ml-auto text-white">
-                        <Button onClick={()=> navigate(LOGIN_ROUTE)}>Авторизация</Button>
+                        <Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
                     </Nav>
                 }
 

@@ -16,14 +16,9 @@ const App = observer(() => {
 
     useEffect(() => {
         check().then(data => {
-            // userStore.setUser(true)
-
-            console.log('data', data)
-
             if (data) {
                 userStore.isAuth = true
             }
-
         })
             .catch((e) => {
                 console.log(e.message)

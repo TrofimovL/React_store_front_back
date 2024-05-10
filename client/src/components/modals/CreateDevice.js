@@ -9,7 +9,7 @@ const CreateDevice = observer(({show, onHide}) => {
     const {deviceStore} = useContext(Context)
 
     const [name, setName] = useState('')
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState('')
     const [file, setFile] = useState(null)
     const [info, setInfo] = useState([])
 
@@ -17,6 +17,7 @@ const CreateDevice = observer(({show, onHide}) => {
         fetchTypes().then(data => deviceStore.types = data)
         fetchBrands().then(data => deviceStore.brands = data)
     }, [deviceStore])
+
 
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
@@ -48,7 +49,7 @@ const CreateDevice = observer(({show, onHide}) => {
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Добавить девайс</Modal.Title>
+                <Modal.Title>Добавить товар</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -67,7 +68,11 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className='mt-2'>
-                        <Dropdown.Toggle>{deviceStore.selectedBrand.name || 'Выберите бренд'}</Dropdown.Toggle>
+                        <Dropdown.Toggle
+                            className={deviceStore.selectedType.name ? '' : 'disabled'}
+                        >
+                            {deviceStore.selectedBrand.name || 'Выберите бренд'}
+                        </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {deviceStore.brands.map(brand =>
                                 <Dropdown.Item
@@ -80,14 +85,14 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Form.Control
-                        placeholder='Введите название устройства'
+                        placeholder='Введите название товара'
                         className='mt-3'
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                     ></Form.Control>
 
                     <Form.Control
-                        placeholder='Введите стоимость устройства'
+                        placeholder='Введите стоимость товара'
                         className='mt-3'
                         type='number'
                         value={price}
@@ -99,7 +104,6 @@ const CreateDevice = observer(({show, onHide}) => {
                         onChange={selectFile}
                     ></Form.Control>
                     <hr/>
-                    <Button variant='outline-primary' onClick={addInfo}>Добавить новое свойство</Button>
                     {info.map(i =>
                         <Row key={i.number} className='mt-2'>
                             <Col md={4}>
@@ -110,7 +114,7 @@ const CreateDevice = observer(({show, onHide}) => {
                                 >
                                 </Form.Control>
                             </Col>
-                            <Col md={4} className='mt-2'>
+                            <Col md={4}>
                                 <Form.Control
                                     placeholder='Описание'
                                     value={i.description}
@@ -118,11 +122,13 @@ const CreateDevice = observer(({show, onHide}) => {
                                 >
                                 </Form.Control>
                             </Col>
-                            <Col md={4} className='mt-2' onClick={() => removeInfo(i.number)}>
+                            <Col md={4} onClick={() => removeInfo(i.number)}>
                                 <Button variant='outline-danger'>Удалить</Button>
                             </Col>
                         </Row>
                     )}
+                    <Button variant='outline-primary' className='mt-3' onClick={addInfo}>Добавить новое
+                        свойство</Button>
                 </Form>
             </Modal.Body>
 
