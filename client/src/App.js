@@ -1,6 +1,6 @@
 import {BrowserRouter} from "react-router-dom";
 import React, {useContext, useEffect, useState} from "react";
-import AppRouter from "./components/AppRouter";
+import AppRouterComponent from "./router/AppRouterComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
@@ -18,6 +18,7 @@ const App = observer(() => {
         check().then(data => {
             if (data) {
                 userStore.isAuth = true
+                userStore.user = data
             }
         })
             .catch((e) => {
@@ -41,7 +42,7 @@ const App = observer(() => {
     return (
         <BrowserRouter>
             <NavbarComponent></NavbarComponent>
-            <AppRouter></AppRouter>
+            <AppRouterComponent></AppRouterComponent>
             <NotificationPopup
                 show={isPopupShown}
                 text={textPopup}

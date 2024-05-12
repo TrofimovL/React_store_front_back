@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form} from "react-bootstrap";
-import {NavLink, useLocation, useNavigate, useNavigation} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
 import {login, registration} from "../http/userAPI";
 import {observer} from "mobx-react-lite";
@@ -15,16 +15,17 @@ const Auth = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+
     const click = async () => {
         try {
             let data;
             if (isLoginPage) {
                 data = await login(email, password)
-                console.log(data, 'login')
+                console.log('login', data)
 
             } else {
                 data = await registration(email, password)
-                console.log(data, 'registration')
+                console.log('registration', data)
             }
 
             userStore.user = data
