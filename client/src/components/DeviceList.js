@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Row} from "react-bootstrap";
 import {Context} from "../index";
@@ -7,10 +7,6 @@ import DeviceItem from "./DeviceItem";
 const DeviceList = observer(() => {
     const {deviceStore} = useContext(Context)
 
-
-    useEffect(() => {
-        console.log(deviceStore.devices)
-    }, [])
 
     return (
         <Row className='d-flex'>

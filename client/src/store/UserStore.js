@@ -3,8 +3,8 @@ import {makeAutoObservable} from "mobx";
 export default class UserStore {
     constructor() {
         this._isAuth = false
-        this._isAdmin = false
         this._user = {}
+        this._role = 'CUSTOMER'
         makeAutoObservable(this)
     }
 
@@ -13,13 +13,15 @@ export default class UserStore {
         if (!bool) {
             localStorage.removeItem('auth')
         }
-        console.log('isAuth =', bool)
     }
 
 
     set user(user) {
-        console.log('set user', user)
         this._user = user
+    }
+
+    set role(role){
+        this._role = role
     }
 
     get isAuth() {
@@ -28,6 +30,14 @@ export default class UserStore {
 
     get user() {
         return this._user
+    }
+
+    get isAdmin(){
+        return this._user.role === 'ADMIN'
+    }
+
+    get role(){
+        return this._role
     }
 
 }

@@ -2,12 +2,13 @@ import React from 'react';
 import {Navigate, Route} from "react-router-dom";
 import {SHOP_ROUTE} from "../utils/consts";
 
-const GuardedRoute = ({isAuth, ...props}) => {
-    if (!isAuth) {
+const GuardedRoute = ({condition, element}) => {
+
+    if (!condition) {
         return <Navigate to={SHOP_ROUTE}></Navigate>
     }
 
-    return <Route {...props}></Route>
+    return element
 };
 
 export default GuardedRoute;

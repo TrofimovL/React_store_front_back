@@ -25,7 +25,7 @@ const NavbarComponent = () => {
                     <Nav className="ml-auto text-white">
 
                         {
-                            userStore.user.role && <Button onClick={() => navigate(ADMIN_ROUTE)}>Админ панель</Button>
+                            userStore.isAdmin && <Button onClick={() => navigate(ADMIN_ROUTE)}>Админ панель</Button>
                         }
                         <Button
                             className='mx-2'
