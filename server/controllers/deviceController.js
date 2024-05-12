@@ -64,6 +64,25 @@ class DeviceController {
         })
         return res.json(device)
     }
+
+    async deleteOne(req, res) {
+        const {id} = req.params
+        const device = await Device.findOne({where: {id}})
+
+        if (!device) {
+            res.status(404).json({error: true, message: 'Item with this ID is not found'})
+        } else {
+            await Device.destroy({where: {id: id}})
+                .then(() => {
+                    res.status(200).json({error: false, message: 'Successfully deleted'})
+                })
+                .catch(error => {
+                    res.status(400).json(error)
+                });
+        }
+
+
+    }
 }
 
 module.exports = new DeviceController()

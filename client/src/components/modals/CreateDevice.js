@@ -37,7 +37,7 @@ const CreateDevice = observer(({show, onHide}) => {
 
     const addDevice = () => {
         const formData = new FormData();
-        formData.append('name', price)
+        formData.append('name', name)
         formData.append('price', price)
         formData.append('img', file)
         formData.append('brandId', deviceStore.selectedBrand.id)

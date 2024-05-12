@@ -15,7 +15,6 @@ const AppRouterComponent = () => {
                         key={path}
                         path={path}
                         element={
-                            // <Component/>
                             <GuardedRoute
                                 condition={userStore.isAdmin}
                                 path={path}

@@ -6,6 +6,7 @@ import {DEVICE_ROUTE} from "../utils/consts";
 
 const DeviceItem = ({device}) => {
     const navigate = useNavigate()
+
     return (
         <Col
             md={4}

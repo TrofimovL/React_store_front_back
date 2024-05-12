@@ -18,6 +18,8 @@ const Shop = observer(() => {
         fetchDevices(null, null, 1, 3).then(data => {
             deviceStore.devices = data.rows
             deviceStore.totalCount = data.count
+            console.log(deviceStore.devices)
+
         })
     }, [])
 
